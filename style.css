@@ -1,0 +1,545 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+
+    --font-main:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+
+    --glass-bg: rgba(255,255,255,0.15);
+    --glass-border: rgba(255,255,255,0.25);
+
+    --shadow-soft: 0 8px 32px rgba(0,0,0,0.15);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.25);
+
+    --transition-smooth: all 0.45s ease;
+
+}
+
+
+/* =========================
+   BODY
+   ========================= */
+
+body{
+
+    font-family: var(--font-main);
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    color: white;
+
+    overflow-x: hidden;
+
+    transition:
+        background 1.2s ease,
+        background-color 1.2s ease;
+
+}
+
+
+/* Animated sky overlay */
+
+body::before{
+
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.25;
+
+    background-size: 400% 400%;
+
+    animation: skyDrift 25s ease infinite;
+
+    z-index: -2;
+
+}
+
+@keyframes skyDrift{
+
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+
+}
+
+
+/* =========================
+   SKY THEMES
+   ========================= */
+
+body.clear{
+
+    background:
+    linear-gradient(
+        180deg,
+        #56ccf2 0%,
+        #2f80ed 100%);
+
+}
+
+body.clear::before{
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.2), transparent 40%);
+
+}
+
+
+/* CLOUDS */
+
+body.clouds{
+
+    background:
+    linear-gradient(
+        180deg,
+        #bdc3c7 0%,
+        #2c3e50 100%);
+
+}
+
+body.clouds::before{
+
+    background:
+    radial-gradient(circle, rgba(255,255,255,0.2), transparent 50%);
+
+}
+
+
+/* RAIN */
+
+body.rain{
+
+    background:
+    linear-gradient(
+        180deg,
+        #1f4037 0%,
+        #0f2027 100%);
+
+}
+
+body.rain::before{
+
+    background:
+    repeating-linear-gradient(
+        120deg,
+        rgba(255,255,255,0.1) 0px,
+        rgba(255,255,255,0.1) 2px,
+        transparent 3px,
+        transparent 6px
+    );
+
+    animation: rainMove 1s linear infinite;
+
+}
+
+@keyframes rainMove{
+
+    from{background-position:0 0;}
+    to{background-position:-200px 400px;}
+
+}
+
+
+/* THUNDERSTORM */
+
+body.thunderstorm{
+
+    background:
+    linear-gradient(
+        180deg,
+        #232526 0%,
+        #000000 100%);
+
+}
+
+
+/* SNOW */
+
+body.snow{
+
+    background:
+    linear-gradient(
+        180deg,
+        #e6dada 0%,
+        #274046 100%);
+
+}
+
+
+/* NIGHT */
+
+body.night{
+
+    background:
+    linear-gradient(
+        180deg,
+        #0f2027 0%,
+        #203a43 50%,
+        #2c5364 100%);
+
+}
+
+body.night::before{
+
+    background:
+    radial-gradient(circle at 30% 20%, white 1px, transparent 2px),
+    radial-gradient(circle at 70% 40%, white 1px, transparent 2px),
+    radial-gradient(circle at 50% 70%, white 1px, transparent 2px);
+
+    background-size: 200px 200px;
+
+}
+
+
+/* HOT */
+
+body.hot{
+
+    background:
+    linear-gradient(
+        180deg,
+        #ff7e5f 0%,
+        #feb47b 100%);
+
+}
+
+
+/* DEFAULT */
+
+body.default{
+
+    background:
+    linear-gradient(
+        180deg,
+        #667eea 0%,
+        #764ba2 100%);
+
+}
+
+
+/* =========================
+   MAIN CONTAINER
+   ========================= */
+
+.container{
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid var(--glass-border);
+
+    box-shadow: var(--shadow-soft);
+
+    transition: var(--transition-smooth);
+
+    animation: fadeInUp 0.8s ease;
+
+    position: relative;
+
+    z-index: 10;
+
+}
+
+.container:hover{
+
+    box-shadow: var(--shadow-hover);
+
+}
+
+
+@keyframes fadeInUp{
+
+    from{
+
+        opacity: 0;
+        transform: translateY(20px);
+
+    }
+
+    to{
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+h1{
+
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+
+}
+
+
+/* =========================
+   INPUT
+   ========================= */
+
+input{
+
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 12px;
+
+    border: none;
+    outline: none;
+
+    margin-bottom: 15px;
+
+    font-size: 16px;
+
+    background: rgba(255,255,255,0.2);
+
+    color: white;
+
+    transition: var(--transition-smooth);
+
+}
+
+input::placeholder{
+
+    color: rgba(255,255,255,0.7);
+
+}
+
+input:focus{
+
+    background: rgba(255,255,255,0.3);
+
+    box-shadow:
+    0 0 0 3px rgba(255,255,255,0.15);
+
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+button{
+
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    background: rgba(255,255,255,0.25);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: var(--transition-smooth);
+
+}
+
+button:hover{
+
+    background: rgba(255,255,255,0.35);
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-hover);
+
+}
+
+button:active{
+
+    transform: scale(0.98);
+
+}
+
+
+/* =========================
+   WEATHER RESULT
+   ========================= */
+
+#weatherResult{
+
+    margin-top: 20px;
+
+    animation: fadeInUp 0.6s ease;
+
+}
+
+#weatherResult h2{
+
+    font-size: 28px;
+    font-weight: 600;
+
+}
+
+#weatherResult img{
+
+    width: 80px;
+    height: 80px;
+
+}
+
+
+/* TEMPERATURE */
+
+.temp{
+
+    font-size: 42px;
+    font-weight: 700;
+
+    margin: 10px 0;
+
+}
+
+
+/* =========================
+   FORECAST HEADERS
+   ========================= */
+
+#weatherResult h4{
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+
+/* =========================
+   HOURLY FORECAST
+   ========================= */
+
+#weatherResult > div > div{
+
+    display: flex;
+
+    overflow-x: auto;
+
+    gap: 12px;
+
+    scrollbar-width: none;
+
+}
+
+#weatherResult > div > div::-webkit-scrollbar{
+
+    display: none;
+
+}
+
+
+/* HOURLY CARD */
+
+#weatherResult > div > div > div{
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    min-width: 80px;
+
+    text-align: center;
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    transition: var(--transition-smooth);
+
+}
+
+#weatherResult > div > div > div:hover{
+
+    transform: translateY(-4px);
+
+    background: rgba(255,255,255,0.2);
+
+}
+
+
+/* =========================
+   DAILY FORECAST ROW
+   ========================= */
+
+#weatherResult > div > div{
+
+    margin-bottom: 6px;
+
+}
+
+
+/* =========================
+   LOADER
+   ========================= */
+
+#loader{
+
+    z-index: 9999 !important;
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media(max-width:480px){
+
+    .container{
+
+        padding: 20px;
+
+    }
+
+    .temp{
+
+        font-size: 36px;
+
+    }
+
+}
